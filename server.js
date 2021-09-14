@@ -28,16 +28,18 @@ fastify.get("/image.jpg", async function(request, reply) {
   reply.send(buffer);
 });
 
+fastify.options("/image.jpg", async function(request, reply) {
+  reply.header("Access-Control-Allow-Origin", "*");
+  reply.send(null);
+});
+
+
+
 fastify.get("/", async function(request, reply) {
   reply.send({
     usage:
       "pass encoded url and reply og-image url. example: https://og-image.glitch.me/https%3A%2F%2Fopen.spotify.com%2Falbum%2F063f8Ej8rLVTz9KkjQKEMa"
   });
-});
-
-fastify.options("*", async function(request, reply) {
-  reply.header("Access-Control-Allow-Origin", "*");
-  reply.send(null);
 });
 
 // Run the server and report out to the logs
