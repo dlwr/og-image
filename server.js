@@ -4,6 +4,7 @@
 */
 
 const path = require("path");
+import fetch from 'node-fetch';
 
 // Require the fastify framework and instantiate it
 const fastify = require("fastify")({

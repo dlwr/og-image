@@ -11,8 +11,9 @@
     "fastify-formbody": "^5.0.0",
     "fastify-static": "^4.0.0",
     "handlebars": "^4.7.7",
-    "point-of-view": "^4.14.0",
-    "node-fetch": "^3.0.0"
+    "jsdom": "^17.0.0",
+    "node-fetch": "^3.0.0",
+    "point-of-view": "^4.14.0"
   },
   "engines": {
     "node": "12.x"
