@@ -16,7 +16,7 @@
     "point-of-view": "^4.15.2"
   },
   "engines": {
-    "node": "12.x"
+    "node": "16.x"
   },
   "repository": {
     "url": "https://glitch.com/edit/#!/glitch-hello-node"

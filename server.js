@@ -4,7 +4,8 @@
 */
 
 const path = require('path');
-const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
+// const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
+import fetch from 'node-fetch';
 const jsdom = require("jsdom");
 
 // Require the fastify framework and instantiate it
@@ -39,14 +40,15 @@ if (seo.url === "glitch-default") {
 }
 
 fastify.get("/album/:album", async function(request, reply) {
-  reply.sent = true;
-  reply.raw.end(`${request.params.album}`);
-  
+  console.log(request.params.album);
+  console.log(`https://open.spotify.com/album/${request.params.album}`);
   const response = await fetch(`https://open.spotify.com/album/${request.params.album}`);
+  console.log(response);
   const dom = new jsdom(response.body);
   const jacketUrl = dom.querySelector('meta[property="og:image"]').content;
-
-  return Promise.resolve(jacketUrl);
+  reply.sent = true;
+  reply.raw.end(`${request.params.album}`);
+  return Promise.resolve();
 })
 
 /**
