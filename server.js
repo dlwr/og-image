@@ -3,9 +3,10 @@
 * Check out the two endpoints this back-end API provides in fastify.get and fastify.post below
 */
 
+import fetch from 'node-fetch';
+
 const path = require('path');
 // const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
-import fetch from 'node-fetch';
 const jsdom = require("jsdom");
 
 // Require the fastify framework and instantiate it
