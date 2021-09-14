@@ -8,7 +8,7 @@ const fastify = Fastify({
 
 fastify.get("/:url", async function (request, reply) {
   const response = await fetch(
-
+    decodeURI(request.params.url)
   );
   const { document } = new JSDOM(await response.text()).window;
   const jacketUrl = document.querySelector('meta[property="og:image"]').content;
@@ -16,6 +16,18 @@ fastify.get("/:url", async function (request, reply) {
   reply.raw.end(jacketUrl);
   return Promise.resolve();
 });
+
+fastify.get("/", async function (request, reply) {
+  const response = await fetch(
+    decodeURI(request.params.url)
+  );
+  const { document } = new JSDOM(await response.text()).window;
+  const jacketUrl = document.querySelector('meta[property="og:image"]').content;
+  reply.sent = true;
+  reply.raw.end(jacketUrl);
+  return Promise.resolve();
+});
+
 
 // Run the server and report out to the logs
 fastify.listen(process.env.PORT, function (err, address) {
