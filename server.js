@@ -3,9 +3,9 @@
 * Check out the two endpoints this back-end API provides in fastify.get and fastify.post below
 */
 
-import path from 'path';
-import fetch from 'node-fetch';
-import jsdom from 'jsdom';
+const path = require('path');
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
+const jsdom = require("jsdom");
 
 // Require the fastify framework and instantiate it
 const fastify = require("fastify")({
@@ -38,13 +38,15 @@ if (seo.url === "glitch-default") {
   seo.url = `https://${process.env.PROJECT_DOMAIN}.glitch.me`;
 }
 
-fastify.get("/albums/:album", function(request, reply) {
-  reply.sent = true
-  reply.raw.end(`${request.params.album}`)
+fastify.get("/album/:album", async function(request, reply) {
+  reply.sent = true;
+  reply.raw.end(`${request.params.album}`);
   
-  
+  const response = await fetch(`https://open.spotify.com/album/${request.params.album}`);
+  const dom = new jsdom(response.body);
+  const jacketUrl = dom.querySelector('meta[property="og:image"]').content;
 
-  return Promise.resolve('this will be skipped')
+  return Promise.resolve(jacketUrl);
 })
 
 /**
