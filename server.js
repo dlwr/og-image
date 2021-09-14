@@ -36,6 +36,8 @@ if (seo.url === "glitch-default") {
   seo.url = `https://${process.env.PROJECT_DOMAIN}.glitch.me`;
 }
 
+fastify.get("/", function())
+
 /**
 * Our home page route
 *
