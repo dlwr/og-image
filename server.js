@@ -36,7 +36,14 @@ if (seo.url === "glitch-default") {
   seo.url = `https://${process.env.PROJECT_DOMAIN}.glitch.me`;
 }
 
-fastify.get("/", function())
+fastify.get("/:album", function(request, reply) {
+  reply.sent = true
+  reply.raw.end(`${request.params.album}`)
+  
+  new Parser
+
+  return Promise.resolve('this will be skipped')
+})
 
 /**
 * Our home page route
