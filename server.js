@@ -23,8 +23,10 @@ fastify.get("/image.jpg", async function (request, reply) {
   const ogImageUrl = document.querySelector(
     'meta[property="og:image"]'
   ).content;
+  console.log(ogImageUrl);
   const imageResponse = await fetch(ogImageUrl);
   const buffer = await imageResponse.buffer();
+  reply.type('image/jpeg');
   reply.send(buffer);
 });
 
