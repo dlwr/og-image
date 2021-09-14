@@ -15,6 +15,17 @@ fastify.get("/:url", async function (request, reply) {
   reply.send({ ogImage: ogImageUrl });
 });
 
+fastify.get("/:url.png", async function (request, reply) {
+    const response = await fetch(decodeURI(request.params.url));
+    const { document } = new JSDOM(await response.text()).window;
+    const ogImageUrl = document.querySelector(
+      'meta[property="og:image"]'
+    ).content;
+    const imageResponse = await fetch(ogImageUrl);
+    const buffer = await imageResponse.buffer();
+    reply.send(buffer);
+  });
+
 fastify.get("/", async function (request, reply) {
   reply.send({
     usage:
