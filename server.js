@@ -3,8 +3,9 @@
 * Check out the two endpoints this back-end API provides in fastify.get and fastify.post below
 */
 
-const path = require("path");
+import path from 'path';
 import fetch from 'node-fetch';
+import jsdom from 'jsdom';
 
 // Require the fastify framework and instantiate it
 const fastify = require("fastify")({
@@ -37,11 +38,11 @@ if (seo.url === "glitch-default") {
   seo.url = `https://${process.env.PROJECT_DOMAIN}.glitch.me`;
 }
 
-fastify.get("/:album", function(request, reply) {
+fastify.get("/albums/:album", function(request, reply) {
   reply.sent = true
   reply.raw.end(`${request.params.album}`)
   
-  new Parser
+  
 
   return Promise.resolve('this will be skipped')
 })
