@@ -15,13 +15,10 @@ fastify.get("/:url", async function(request, reply) {
 });
 
 fastify.get("/image.jpg", async function(request, reply) {
-  console.log(request.query);
-  console.log(request.query.url);
   const response = await fetch(decodeURI(request.query.url));
   const { document } = new JSDOM(await response.text()).window;
   const ogImageUrl = document.querySelector('meta[property="og:image"]')
     .content;
-  console.log(ogImageUrl);
   const imageResponse = await fetch(ogImageUrl);
   const buffer = await imageResponse.buffer();
   reply.header("Access-Control-Allow-Origin", "*");
@@ -34,13 +31,10 @@ fastify.options("/image.jpg", async function(request, reply) {
   reply.send(null);
 });
 
-
-
 fastify.get("/", async function(request, reply) {
-  reply.send({
-    usage:
-      "pass encoded url and reply og-image url. example: https://og-image.glitch.me/https%3A%2F%2Fopen.spotify.com%2Falbum%2F063f8Ej8rLVTz9KkjQKEMa"
-  });
+  reply.send(
+    "pass encoded url and return og-image as image/jpeg.\nusage: https://og-image.glitch.me/image.jpg?url=https%3A%2F%2Fopen.spotify.com%2Falbum%2F063f8Ej8rLVTz9KkjQKEMa"
+  );
 });
 
 // Run the server and report out to the logs
