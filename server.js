@@ -24,6 +24,7 @@ fastify.get("/image.jpg", async function(request, reply) {
   console.log(ogImageUrl);
   const imageResponse = await fetch(ogImageUrl);
   const buffer = await imageResponse.buffer();
+  reply.header("Access-Control-Allow-Origin", "*");
   reply.type("image/jpeg");
   reply.send(buffer);
 });
