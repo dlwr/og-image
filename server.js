@@ -16,7 +16,7 @@ fastify.get("/:url", async function (request, reply) {
 });
 
 fastify.get("/", async function (request, reply) {
-  reply.send({usage: "pass encoded url and reply og-image url\neg: og-image.glitch.me//https%3A%2F%2Fopen.spotify.com%2Falbum%2F063f8Ej8rLVTz9KkjQKEMa"});
+  reply.send({usage: "pass encoded url and reply og-image url. example: https://og-image.glitch.me/https%3A%2F%2Fopen.spotify.com%2Falbum%2F063f8Ej8rLVTz9KkjQKEMa"});
 });
 
 
