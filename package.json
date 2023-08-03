@@ -15,5 +15,10 @@
     "url": "https://github.com/dlwr/og-image"
   },
   "type": "module",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jsdom": "^21.1.1",
+    "@vercel/node": "^2.15.8",
+    "prettier": "^3.0.1"
+  }
 }
