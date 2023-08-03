@@ -7,7 +7,7 @@ const app = Fastify({
   logger: true
 })
 
-app.register(import('../app.ts'))
+app.register(import('../app'))
 
 export default async (req: VercelRequest, res: VercelResponse) => {
   await app.ready()
