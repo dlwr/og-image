@@ -4,12 +4,12 @@
   "description": "A simple Node app built on fastify, instantly up and running.",
   "main": "server.js",
   "dependencies": {
-    "fastify": "^3.21.0",
-    "jsdom": "^17.0.0",
-    "node-fetch": "^3.0.0"
+    "fastify": "^4.21.0",
+    "jsdom": "^22.1.0",
+    "node-fetch": "^3.3.2"
   },
   "engines": {
-    "node": "14.x"
+    "node": "16.x"
   },
   "repository": {
     "url": "https://github.com/dlwr/og-image"
