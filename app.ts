@@ -1,11 +1,6 @@
 import fetch from 'node-fetch'
 import { JSDOM } from 'jsdom'
-import {
-  FastifyInstance,
-  FastifyRequest,
-  FastifyServerOptions,
-  fastify
-} from 'fastify'
+import { FastifyInstance, FastifyRequest, FastifyServerOptions } from 'fastify'
 
 interface CustomRouteGenericParam {
   Params: { url: string }
@@ -27,7 +22,7 @@ export default function (
       const { document } = new JSDOM(await response.text()).window
       const ogImageUrl = document.querySelector<HTMLMetaElement>(
         'meta[property="og:image"]'
-      ).content
+      )?.content
       reply.send({ ogImage: ogImageUrl })
     }
   )
@@ -39,7 +34,11 @@ export default function (
       const { document } = new JSDOM(await response.text()).window
       const ogImageUrl = document.querySelector<HTMLMetaElement>(
         'meta[property="og:image"]'
-      ).content
+      )?.content
+      if (!ogImageUrl) {
+        reply.send(null)
+        return
+      }
       const imageResponse = await fetch(ogImageUrl)
       const buffer = await imageResponse.buffer()
       reply.header('Access-Control-Allow-Origin', '*')
