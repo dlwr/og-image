@@ -1,4 +1,3 @@
-.glitchdotcom.json
-.node-gyp
+.wrangler
 node_modules
-.vercel
+.dev.vars*
